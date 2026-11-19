@@ -1,0 +1,95 @@
+async page => {
+  const check = (ok, message) => { if (!ok) throw new Error(message) }
+  const button = name => page.getByRole('button', {name, exact: true})
+  const combo = name => page.getByRole('combobox', {name, exact: true})
+  const table = page.getByRole('table', {name: 'Vergleich des ISO-Entwurfs'})
+  const count = page.getByLabel('Unterteilungen')
+  const title = 'Bagua Zyklus 05 ' + Date.now()
+  await page.setViewportSize({width: 1440, height: 900})
+  await page.goto('http://127.0.0.1:5173/')
+  await page.locator('#garden').selectOption('bagua')
+  await page.getByText('Vorlagen', {exact: true}).click()
+  await button('Sichtbares Bagua-Netz laden').click()
+  await button('Fläche auswählen').click()
+  const xy = await page.locator('#map').evaluate(map => {
+    const point = new DOMPoint(475, 270).matrixTransform(map.getScreenCTM())
+    return [point.x, point.y]
+  })
+  await page.mouse.click(...xy)
+  const field = await page.locator('#regions legend').textContent()
+  const strip = field + ':strip:2'
+  await page.getByLabel('Objekttyp im Bestand').selectOption('bed')
+  await page.getByLabel('Gartenname').fill(title)
+  await button('Beetplan').click()
+  await combo('Grundfläche').selectOption(field)
+  await count.fill('7')
+  await button('Unterteilung übernehmen').click()
+  await combo('Streifen').selectOption(strip)
+  await count.fill('8')
+  await button('Winkel ändern').click()
+  await page.getByLabel('Winkel (°)', {exact: true}).fill('90')
+  await combo('Kultur').selectOption('Bohne')
+
+  const records = () => page.evaluate(async title => {
+    const {listProjects, readProjectBackup} = await import('/src/integrated-storage.js')
+    const project = (await listProjects()).find(project => project.name === title)
+    return [project, await readProjectBackup(project.id)]
+  }, title)
+  const otherTab = await page.context().newPage()
+  await otherTab.goto(page.url())
+  const setStoredCulture = (id, culture) => otherTab.evaluate(async ({id, strip, culture}) => {
+    const {readProject, saveProject} = await import('/src/integrated-storage.js')
+    const project = await readProject(id)
+    project.planning.cultures[strip] = culture
+    await saveProject(project, project.revision)
+  }, {id, strip, culture})
+  const [original] = await records()
+  await setStoredCulture(original.id, 'Radieschen')
+  const latest = await records()
+  await page.reload()
+  const row = name => table.getByRole('row').filter({has: page.getByRole('rowheader', {name, exact: true})})
+  await row('Kultur').getByRole('cell', {name: 'Bohne', exact: true}).waitFor()
+  await row('Kultur').getByRole('cell', {name: 'Radieschen', exact: true}).waitFor()
+  await row('Unterteilung').getByRole('cell', {name: '8 · 90°', exact: true}).waitFor()
+  await row('Unterteilung').getByRole('cell', {name: '7 · 0°', exact: true}).waitFor()
+  await page.evaluate(() => { window.confirm = () => false })
+  await button('Kultur übernehmen').click()
+  check(JSON.stringify(await records()) === JSON.stringify(latest), 'Vergleichen oder Abbrechen änderte Garten/Sicherung')
+
+  await page.evaluate(() => { window.confirm = () => true })
+  await button('Kultur übernehmen').click()
+  await page.getByText('Kultur übernommen.', {exact: true}).waitFor()
+  const adopted = await records()
+  check(adopted[0].revision === latest[0].revision + 1 && adopted[0].planning.cultures[strip] === 'Bohne' &&
+    adopted[0].planning.splits[field].count === 7 && JSON.stringify(adopted[1]) === JSON.stringify(latest[0]),
+    'Gezielte Übernahme änderte auch Unterteilung oder falschen Checkpoint')
+  await page.reload()
+  await row('Unterteilung').getByRole('cell', {name: '8 · 90°', exact: true}).waitFor()
+  check(await row('Kultur').count() === 0, 'Übernommene Kultur erscheint erneut im Entwurf')
+  await button('Unterteilung verwerfen').click()
+  await table.waitFor({state: 'hidden'})
+  check(JSON.stringify(await records()) === JSON.stringify(adopted), 'Verwerfen schrieb Garten oder Sicherung')
+
+  await combo('Kultur').selectOption('Möhre')
+  await setStoredCulture(original.id, 'Tomate')
+  await page.reload()
+  await row('Kultur').getByRole('cell', {name: 'Tomate', exact: true}).waitFor()
+  await setStoredCulture(original.id, 'Kopfsalat')
+  const concurrent = await records()
+  await page.evaluate(() => { window.confirm = () => true })
+  await button('Kultur übernehmen').click()
+  await page.locator('#project-status').filter({hasText:'Ein anderer Tab'}).waitFor()
+  check(await table.isVisible() && JSON.stringify(await records()) === JSON.stringify(concurrent),
+    'Schreibkonflikt verlor Entwurf oder überschrieb die neuere Revision')
+  await setStoredCulture(original.id, 'Möhre')
+  const identical = await records()
+  await page.reload()
+  await table.waitFor()
+  check(await row('Kultur').getByRole('cell', {name: 'Möhre', exact: true}).count() === 2, 'Gleiche Kultur nicht erkennbar')
+  await button('Kultur übernehmen').click()
+  await table.waitFor({state: 'hidden'})
+  check(JSON.stringify(await records()) === JSON.stringify(identical), 'Gleiche Übernahme erzeugte eine neue Revision')
+  await otherTab.close()
+  return {comparedRevision: latest[0].revision, adoptedRevision: adopted[0].revision,
+    concurrentRevision: concurrent[0].revision, identicalKeptRevision: identical[0].revision}
+}

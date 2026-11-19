@@ -1,0 +1,148 @@
+body:has(> #app) { display: block; }
+#app { display: grid; grid-template-rows: auto auto minmax(0, 1fr); min-width: 0; height: 100dvh; }
+#integrated-navigation { padding: 8px 20px; border-bottom: 1px solid var(--line); }
+#integrated-navigation #project-notices { display: contents; }
+#integrated-navigation .iso-nav-icon { display: none; }
+#integrated-navigation input { width: min(180px, 45vw); }
+#integrated-navigation :is(button, input):disabled { opacity: .6; cursor: not-allowed; }
+#save-state, #project-status, #draft-storage-status { font-size: .9rem; }
+#save-state:not(:empty) { border-radius: 5px; padding: 4px 8px; color: #345140; background: #e7eee1; }
+#save-state.is-dirty { color: #624012; background: #f7ebd2; }
+#save-state:empty, #project-status:empty, #draft-storage-status:empty { position: absolute; }
+#project-status { flex: 1 1 180px; }
+#iso-page { display: block; overflow: auto; scrollbar-gutter: stable; }
+#project-page {
+  width: min(680px, calc(100% - 24px)); max-height: calc(100dvh - 24px); overflow: auto;
+  color: inherit; background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
+}
+#project-page::backdrop { background: #20332b66; }
+.library-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 14px; }
+.library-heading h2 { margin: 0; }
+.iso-stage { min-width: 0; }
+.iso-stage:has(.iso-planning-scene):not([hidden]) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 335px); gap: 16px; align-items: start; }
+.iso-planning-controls label { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; margin-block: 8px; }
+.iso-planning-controls select { max-width: 100%; }
+.project-row, #legacy-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+#project-page label { display: block; }
+#project-page input[type=file] { max-width: 100%; }
+#library-status:empty { display: none; }
+.world-basemap-control { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.world-basemap-control[hidden] { display: none; }
+.world-basemap-control [aria-pressed="true"] { background: #23483b; color: #fff; border-color: #23483b; }
+.world-basemap-notice {
+  position: absolute;
+  inset-inline: 8px auto;
+  bottom: 32px;
+  max-width: calc(100% - 16px);
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #f9fbf4ed;
+  color: #253a2e;
+  font-size: .76rem;
+  pointer-events: none;
+}
+.world-basemap-notice:empty { display: none; }
+@media (max-width: 760px) {
+  body:has(> #app) { height: auto; }
+  #app { height: auto; min-height: 100dvh; grid-template-rows: auto auto 1fr; }
+  #app header { flex-flow: row wrap; align-items: center; }
+  #integrated-navigation { padding: 6px 8px; }
+  #integrated-navigation input { width: min(130px, 40vw); }
+  .iso-stage:has(.iso-planning-scene):not([hidden]) { grid-template-columns: minmax(0, 1fr); }
+}
+
+.season-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  min-width: 0;
+  margin-bottom: 12px;
+}
+.season-calendar {
+  display: flex;
+  flex: 1 1 720px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.season-calendar label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  max-width: 100%;
+}
+.season-calendar select { max-width: min(100%, 250px); }
+.season-calendar input[type=range] { flex: 1 1 125px; min-width: 86px; padding-inline: 0; }
+.season-readouts {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16rem;
+  align-items: baseline;
+  gap: 4px 12px;
+  min-width: 0;
+}
+.season-view { min-width: 0; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.season-moon {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 6px;
+  min-width: 0;
+  min-block-size: 32px;
+  margin: 0;
+  color: var(--iso-ink);
+  font-size: .9rem;
+  line-height: 16px;
+  overflow-wrap: anywhere;
+}
+.season-moon-text { grid-column: 2; grid-row: 1; }
+.season-moon-icon {
+  position: relative;
+  block-size: 26px;
+  overflow: hidden;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: var(--iso-surface);
+}
+.season-moon-icon[data-phase="full"] { background: currentColor; }
+.season-moon-icon:is([data-phase^="waxing-"], [data-phase="first-quarter"]) {
+  background: linear-gradient(to right, var(--iso-surface) 50%, currentColor 50%);
+}
+.season-moon-icon:is([data-phase^="waning-"], [data-phase="last-quarter"]) {
+  background: linear-gradient(to left, var(--iso-surface) 50%, currentColor 50%);
+}
+.season-moon-icon:is([data-phase$="-crescent"], [data-phase$="-gibbous"])::after {
+  content: '';
+  position: absolute;
+  inset: 0 21%;
+  border-radius: 50%;
+  background: currentColor;
+}
+.season-moon-icon[data-phase$="-crescent"]::after { background: var(--iso-surface); }
+@media (max-width: 560px) {
+  .season-readouts { grid-template-columns: minmax(0, 1fr); }
+}
+.season-project-dialog {
+  width: min(680px, calc(100% - 24px));
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+  color: inherit;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.season-project-dialog::backdrop { background: #20332b66; }
+.season-project-list { display: grid; gap: 8px; padding: 0; margin: 0 0 14px; list-style: none; }
+.season-project-list li { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; }
+.season-project-list li > :first-child { max-width: 100%; overflow-wrap: anywhere; }
+.season-project-list li > span { font-size: .9rem; }
+.season-project-form { display: grid; justify-items: start; gap: 8px; margin-block: 10px; }
+.season-project-form h3 { margin: 0; }
+.season-project-form label { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; max-width: 100%; }
+.season-project-form input:not([type=checkbox]), .season-project-form select { max-width: 100%; }
+.season-project-dialog [hidden], .season-project-status:empty { display: none; }

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luftbild · Eingabemessung</title>
+<link rel="icon" href="data:,">
+<style>
+  body { font: 16px system-ui; margin: 20px; background: #f3f5f1; color: #192a23; }
+  main { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+  canvas { display: block; width: min(624px, 95vw); height: auto; cursor: crosshair; }
+  aside { width: 320px; }
+  aside div { margin: .8rem 0; }
+  button, input { font: inherit; padding: .35rem; }
+</style>
+<h1 id="heading">Luftbildtest</h1>
+<main>
+  <canvas aria-label="Orthofoto" tabindex="0"></canvas>
+  <aside>
+    <p id="instructions"></p>
+    <div id="object-buttons">
+      <button type="button" id="bed">Beet beginnen</button>
+      <button type="button" id="path">Weg beginnen</button>
+    </div>
+    <div id="rgb-buttons" hidden><button type="button" id="pair">RGB-Paar beginnen</button></div>
+    <div id="width-row" hidden><label>Weg-Halbbreite <input type="number" id="width" min="1" max="40"></label></div>
+    <button type="button" id="finish" disabled>Abschließen</button>
+    <button type="button" id="undo" disabled>Letzten Punkt entfernen</button>
+    <p id="status" role="status"></p>
+    <button type="button" id="export" disabled>Eingaben exportieren</button>
+  </aside>
+</main>
+<script type="module" src="./capture.js"></script>
+</html>

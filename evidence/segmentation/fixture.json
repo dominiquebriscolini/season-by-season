@@ -1,0 +1,68 @@
+{
+  "name": "Jardin Bagua Kirchberg",
+  "locality": "Kirchberg, Luxembourg-Ville",
+  "image": {
+    "url": "/evidence/segmentation/bagua-ortho-2023.png",
+    "extent": [
+      6.1715788053,
+      49.6293907076,
+      6.172441188,
+      49.6299492948
+    ],
+    "attribution": {
+      "url": "https://data.public.lu/en/datasets/orthophoto-officielle-du-grand-duche-de-luxembourg-edition-2023/",
+      "text": "Orthofoto 2023 · ACT Luxembourg · CC0"
+    },
+    "license": "CC0-1.0",
+    "requestUrl": "https://wmts1.geoportail.lu/opendata/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=ortho_2023&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A3857&BBOX=687017.010,6382338.516,687113.010,6382434.516&WIDTH=624&HEIGHT=624",
+    "projection": "EPSG:3857",
+    "projectedExtent": [
+      687017.01,
+      6382338.516,
+      687113.01,
+      6382434.516
+    ],
+    "size": [
+      624,
+      624
+    ]
+  },
+  "suggestedBoundary": [
+    [
+      6.1720763338,
+      49.6297290833
+    ],
+    [
+      6.1722311204,
+      49.6298078583
+    ],
+    [
+      6.1723582666,
+      49.6297604143
+    ],
+    [
+      6.172384525,
+      49.6297040185
+    ],
+    [
+      6.1723389183,
+      49.6296395661
+    ],
+    [
+      6.1722490867,
+      49.6296153965
+    ],
+    [
+      6.1721260866,
+      49.6296449372
+    ],
+    [
+      6.1720694237,
+      49.6296744779
+    ],
+    [
+      6.1720763338,
+      49.6297290833
+    ]
+  ]
+}

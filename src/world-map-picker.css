@@ -1,0 +1,71 @@
+.world-map-picker {
+  width: min(1000px, calc(100% - 24px));
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+  color: inherit;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.world-map-picker::backdrop { background: #20332b66; }
+.world-map-picker form, .world-map-picker form label, .world-map-picker__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.world-map-picker form label { flex: 1 1 250px; }
+.world-map-picker input { flex: 1 1 160px; min-width: 0; }
+.world-map-picker p { margin: 8px 0; }
+.world-map-picker p:empty { display: none; }
+.world-map-picker__results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+  max-height: 132px;
+  overflow: auto;
+  padding: 3px;
+  list-style: none;
+}
+.world-map-picker__results:empty { display: none; }
+.world-map-picker__results li { min-width: 0; max-width: 100%; }
+.world-map-picker__results button { max-width: 100%; text-align: start; overflow-wrap: anywhere; }
+.world-map-picker__frame {
+  position: relative;
+  height: clamp(240px, 52dvh, 624px);
+  margin-block: 8px;
+  overflow: hidden;
+  background: #e4ece4;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.world-map-picker__canvas { width: 100%; height: 100%; }
+.world-map-picker .world-map-picker__tile-status {
+  position: absolute;
+  inset: 8px 8px auto 50px;
+  justify-self: start;
+  width: max-content;
+  max-width: calc(100% - 58px);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #f9fbf4ed;
+  color: #253a2e;
+  font-size: .8rem;
+  pointer-events: none;
+}
+.world-map-picker__canvas .ol-control button { min-height: 0; padding: 0; }
+.world-map-picker__canvas .ol-attribution li { font-size: .78rem; }
+.world-map-picker__selection {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border: 2px solid #255242;
+  box-shadow: 0 0 0 1px #fffc inset, 0 0 0 1px #fffc;
+}
+.world-map-picker__actions p { flex: 1 1 200px; margin: 0; }
+.world-map-picker button:disabled { opacity: .55; cursor: not-allowed; }

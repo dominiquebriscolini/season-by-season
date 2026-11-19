@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visual Design Audit 01 · Season by Season</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    * { box-sizing: border-box }
+    body { margin: 0; background: var(--desk); color: var(--ink); font: .875rem/1.5 'Segoe UI', system-ui, sans-serif }
+    a { color: var(--accent); text-underline-offset: 3px }
+    :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px }
+    header, main, footer { margin-inline: auto; width: min(1264px, calc(100% - 48px)) }
+    header { padding-block: 22px 28px; display: grid; gap: 10px; border-bottom: 1px solid var(--control-line) }
+    .brand { font-weight: 650; color: var(--accent) }
+    h1 { font: clamp(2rem, 5vw, 4rem)/1.06 Georgia, serif; margin: 0; letter-spacing: -.045em }
+    h2, p { margin: 0 }
+    h2 { font: 650 clamp(1.12rem, 2.4vw, 1.375rem)/1.25 'Segoe UI', system-ui, sans-serif; letter-spacing: -.015em }
+    header p { max-width: 66ch; color: var(--muted) }
+    main { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; padding-block: 24px }
+    article { min-width: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); display: grid; gap: 16px; padding: 16px }
+    .compare { display: grid; grid-template-columns: minmax(0, 1fr) minmax(82px, 23%); align-items: start; gap: 10px }
+    .compare a { min-width: 0; display: grid; gap: 4px; font: var(--small-type); font-weight: 600 }
+    img { display: block; width: 100%; border: 1px solid var(--line); border-radius: 5px; background: var(--desk) }
+    .buttons { display: flex; align-items: center; flex-wrap: wrap; gap: 8px }
+    .buttons a { display: inline-flex; align-items: center; min-height: 44px; border: 1px solid var(--control-line); border-radius: 6px; padding: 0 10px; font-weight: 650; text-decoration: none }
+    .buttons a:first-child { background: var(--accent); color: var(--on-accent); border-color: var(--accent) }
+    .buttons a:hover { text-decoration: underline }
+    .recommendation { padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--surface); color: var(--ink); margin-bottom: 14px }
+    footer { padding-block: 4px 22px; color: var(--muted) }
+    @media (max-width: 800px) {
+      header, main, footer { width: calc(100% - 24px) }
+      header { padding-block: 18px }
+      main { grid-template-columns: 1fr; gap: 12px; padding-block: 12px }
+      article { padding: 12px }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="brand">Season by Season</p>
+    <h1>Visual Design Audit 01</h1>
+    <p>Zwei Layouts für denselben Garten. Vergleiche die Zeichenfläche mit geöffneten und geschlossenen Beetdetails oder wechsle am Saisonregler in den Rückblick.</p>
+  </header>
+  <main>
+    <article>
+      <h2>A · Freie Zeichenfläche</h2>
+      <p>Der Garten füllt den Arbeitsbereich. Saisonsteuerung und schließbare Beetdetails liegen als kompakte Ebenen am Rand.</p>
+      <div class="compare">
+        <a href="../../evidence/visual-design-audit-01/entwurf-a-desktop.png"><img src="../../evidence/visual-design-audit-01/entwurf-a-desktop.png" alt="A mit Beetdetails rechts und schwebender Saisonleiste unten" width="1440" height="900" style="height:auto">Desktop</a>
+        <a href="../../evidence/visual-design-audit-01/entwurf-a-mobil.png"><img src="../../evidence/visual-design-audit-01/entwurf-a-mobil.png" alt="A mobil mit frei sichtbarer Zeichnung und Saisonregler" width="390" height="844" style="height:auto">Mobil</a>
+      </div>
+      <div class="buttons">
+        <a href="entwurf.html?layout=a&amp;panel=open&amp;theme=light">A öffnen</a>
+        <a href="entwurf.html?layout=a&amp;theme=dark">Dunkel</a>
+        <a href="entwurf.html?layout=a&amp;year=2027&amp;panel=open">Rückblick</a>
+      </div>
+    </article>
+    <article>
+      <h2>B · Zeichentisch mit Randdock</h2>
+      <p>Kamera und Saison haben feste Ränder. Die Beetdetails rücken neben die Zeichnung und geben ihre Fläche beim Schließen wieder frei.</p>
+      <div class="compare">
+        <a href="../../evidence/visual-design-audit-01/entwurf-b-desktop.png"><img src="../../evidence/visual-design-audit-01/entwurf-b-desktop.png" alt="B mit Beetdetails und Werkzeugen in separaten Randspalten" width="1440" height="900" style="height:auto">Desktop</a>
+        <a href="../../evidence/visual-design-audit-01/entwurf-b-mobil.png"><img src="../../evidence/visual-design-audit-01/entwurf-b-mobil.png" alt="B mobil mit unteren Kamera- und Saison-Docks" width="390" height="844" style="height:auto">Mobil</a>
+      </div>
+      <div class="buttons">
+        <a href="entwurf.html?layout=b&amp;panel=open&amp;theme=light">B öffnen</a>
+        <a href="entwurf.html?layout=b&amp;theme=dark">Dunkel</a>
+        <a href="entwurf.html?layout=b&amp;year=2027&amp;panel=open">Rückblick</a>
+      </div>
+    </article>
+  </main>
+  <footer>
+    <p class="recommendation"><strong>Empfehlung · B als Arbeitsansicht.</strong> Bei 390 × 844 px bleiben mit offenen Beetdetails 266 px freie Zeichenhöhe. A lässt 189 px. Bei 1440 × 900 px ist der Unterschied bei geschlossenem Panel kleiner. Beide zeigen das Bagua-Motiv in derselben Größe.</p>
+    <p>Lokale Entwürfe mit aufgezeichneten Bagua-Ansichten. <a href="/">Regulären Planer öffnen</a></p>
+  </footer>
+</body>
+</html>

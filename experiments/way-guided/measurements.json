@@ -1,0 +1,262 @@
+{
+  "synthetic": {
+    "pathComponents": 1,
+    "residualComponents": 4,
+    "narrowPixels": 5,
+    "widePixels": 15,
+    "expectedRasterWidthsPixels": [
+      7,
+      17
+    ],
+    "partitionAreaErrorPixels": 1.8189894035458565e-12,
+    "stableCultureAfterCorrection": true,
+    "mergeArchivesCulture": true
+  },
+  "gardens": [
+    {
+      "name": "tandel",
+      "imageSha256": "dc2c201b20bce35246d596db9177a788a6fc1a644ef34e9643af59e9a58ec1f9",
+      "referenceSha256": "52b077ededfaf0dcbc00f5b44229a162588897a6fb355ab3abfa679bf445ecb5",
+      "pixelMetres": 0.09911966365709209,
+      "pathComponents": 1,
+      "residualComponents": 1,
+      "residualAreasM2": [
+        1138.8397697584408
+      ],
+      "residualIouAgainstBoundaryMinusReferencedPaths": 0.9974019884419033,
+      "residualAreaErrorM2": 0.5667921703201354,
+      "partitionAreaErrorPixels": 1.4551915228366852e-11,
+      "paths": [
+        {
+          "id": "path-1",
+          "matchedAxis": 1,
+          "iou": 0.7259128135443363,
+          "fixed8PixelIou": 0.7839211952224483,
+          "referenceM2": 9.608641284696315,
+          "predictedM2": 9.041849114376179,
+          "widthSamples": 26,
+          "excludedStations": 0,
+          "widthMAEMetres": 0.20468063543057327,
+          "fixed8PixelWidthMAEMetres": 0.1199763741172301,
+          "widthRangeMetres": [
+            [
+              0.39647865462836834,
+              1.189435963885105
+            ]
+          ]
+        }
+      ],
+      "remainder": [
+        {
+          "id": "bed-1",
+          "bestRegionIou": 0.05130761116466245,
+          "coveredByPaths": 0.0006617176569550594
+        }
+      ],
+      "unresolvedRegionTypes": 1,
+      "widthQuestions": 0,
+      "actionCounts": {
+        "mode": 1,
+        "vertices": 2,
+        "finish": 1
+      },
+      "elapsedMs": {
+        "first": 15.382900000000006,
+        "repeatedMedian": 11.000299999999982
+      },
+      "memoryBytes": {
+        "rgba": 1557504,
+        "rssBefore": 91189248,
+        "rssAfter": 89063424,
+        "heapUsedBefore": 14946568,
+        "heapUsedAfter": 18405184
+      }
+    },
+    {
+      "name": "hesperange",
+      "imageSha256": "b18b2381776a1cb8745c8dc8e95599783bcdfafb4e2901e0b0b36d419d7b4d22",
+      "referenceSha256": "3f724e16e76b43f79ddb6f1fa254604ca7ff75495a70d933050e6c7b1566a200",
+      "pixelMetres": 0.09976102702682783,
+      "pathComponents": 1,
+      "residualComponents": 1,
+      "residualAreasM2": [
+        616.1376533299161
+      ],
+      "residualIouAgainstBoundaryMinusReferencedPaths": 0.9858097442597218,
+      "residualAreaErrorM2": -6.281603290028639,
+      "partitionAreaErrorPixels": 2.1827872842550278e-11,
+      "paths": [
+        {
+          "id": "path-1",
+          "matchedAxis": 1,
+          "iou": 0.36398865235289524,
+          "fixed8PixelIou": 0.38974305063439385,
+          "referenceM2": 6.3495968580170485,
+          "predictedM2": 12.631200148045687,
+          "widthSamples": 26,
+          "excludedStations": 16,
+          "widthMAEMetres": 0.2646856722243856,
+          "fixed8PixelWidthMAEMetres": 0.2633742102699096,
+          "widthRangeMetres": [
+            [
+              0.39904410810731133,
+              1.8954595135097287
+            ]
+          ]
+        }
+      ],
+      "remainder": [
+        {
+          "id": "bed-1",
+          "bestRegionIou": 0.03450930204591963,
+          "coveredByPaths": 0.0031783661122615457
+        },
+        {
+          "id": "bed-2",
+          "bestRegionIou": 0.06804286916030401,
+          "coveredByPaths": 0
+        }
+      ],
+      "unresolvedRegionTypes": 1,
+      "widthQuestions": 1,
+      "actionCounts": {
+        "mode": 1,
+        "vertices": 2,
+        "finish": 1
+      },
+      "elapsedMs": {
+        "first": 8.399099999999976,
+        "repeatedMedian": 8.491600000000005
+      },
+      "memoryBytes": {
+        "rgba": 1557504,
+        "rssBefore": 99053568,
+        "rssAfter": 93822976,
+        "heapUsedBefore": 13632280,
+        "heapUsedAfter": 17284776
+      }
+    },
+    {
+      "name": "bagua",
+      "imageSha256": "4d5e02b580577b75c9bb1981e53ed32508dbb9e171853163de662a3e0ba02c2b",
+      "referenceSha256": "a7f9e22be09aa3452dc81e588d68277ee789413c4ceb6dce9ad77a852f328cc8",
+      "pixelMetres": 0.09965007073632323,
+      "pathComponents": 2,
+      "residualComponents": 1,
+      "residualAreasM2": [
+        310.86827673235126
+      ],
+      "residualIouAgainstBoundaryMinusReferencedPaths": 0.9446827821066502,
+      "residualAreaErrorM2": -6.990503993818124,
+      "partitionAreaErrorPixels": 2.1827872842550278e-11,
+      "paths": [
+        {
+          "id": "path-1",
+          "matchedAxis": 2,
+          "iou": 0.2838319947351378,
+          "fixed8PixelIou": 0.3926058017539889,
+          "referenceM2": 3.748622940008047,
+          "predictedM2": 2.3037916906789797,
+          "widthSamples": 13,
+          "excludedStations": 0,
+          "widthMAEMetres": 0.3157847045553778,
+          "fixed8PixelWidthMAEMetres": 0.08281557838991516,
+          "widthRangeMetres": [
+            [
+              0.3986002829452929,
+              0.3986002829452929
+            ]
+          ]
+        },
+        {
+          "id": "path-2",
+          "matchedAxis": 1,
+          "iou": 0.17444533697234868,
+          "fixed8PixelIou": 0.12940351330200225,
+          "referenceM2": 6.10205470366412,
+          "predictedM2": 14.537389946811167,
+          "widthSamples": 5,
+          "excludedStations": 17,
+          "widthMAEMetres": 0.5593187282939839,
+          "fixed8PixelWidthMAEMetres": 0.25904512745931507,
+          "widthRangeMetres": [
+            [
+              0.4982503536816162,
+              2.491251768408081
+            ]
+          ]
+        }
+      ],
+      "remainder": [
+        {
+          "id": "bed-1",
+          "bestRegionIou": 0.019261765242500208,
+          "coveredByPaths": 0
+        },
+        {
+          "id": "bed-2",
+          "bestRegionIou": 0.030745373376575288,
+          "coveredByPaths": 0
+        }
+      ],
+      "unresolvedRegionTypes": 1,
+      "widthQuestions": 1,
+      "actionCounts": {
+        "mode": 2,
+        "vertices": 4,
+        "finish": 2
+      },
+      "elapsedMs": {
+        "first": 5.7771999999999935,
+        "repeatedMedian": 4.918349999999975
+      },
+      "memoryBytes": {
+        "rgba": 1557504,
+        "rssBefore": 102989824,
+        "rssAfter": 97583104,
+        "heapUsedBefore": 16560976,
+        "heapUsedAfter": 12434712
+      }
+    }
+  ],
+  "baguaMainNetwork": {
+    "pathComponents": 1,
+    "residualComponents": 4,
+    "residualAreasM2": [
+      147.8893791184726,
+      74.36084706600151,
+      41.04491138847713,
+      0.014926193011080254
+    ],
+    "partitionAreaErrorPixels": 1.0186340659856796e-10,
+    "remainder": [
+      {
+        "id": "bed-1",
+        "bestRegionIou": 0.03798763024968796,
+        "coveredByPaths": 0.059514830214220375
+      },
+      {
+        "id": "bed-2",
+        "bestRegionIou": 0.05806493381924408,
+        "coveredByPaths": 0.0959754719842024
+      }
+    ],
+    "widthQuestions": 12,
+    "actionCounts": {
+      "mode": 7,
+      "vertices": 32,
+      "finish": 7
+    },
+    "elapsedMs": {
+      "first": 52.9764,
+      "repeatedMedian": 25.281999999999968
+    },
+    "memoryBytes": {
+      "rgba": 1557504,
+      "rssBefore": 68993024,
+      "rssAfter": 80158720,
+      "heapUsedBefore": 7408640,
+      "heapUsedAfter": 15857912
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "name": "Jardin d’Hesperange",
+  "locality": "Hesperange, Luxemburg",
+  "image": {
+    "url": "/evidence/transfer/hesperange-ortho-2023.png",
+    "extent": [
+      6.153628813,
+      49.575130396,
+      6.154491196,
+      49.575689605
+    ],
+    "attribution": {
+      "text": "Orthofoto 2023 · ACT Luxembourg · CC0",
+      "url": "https://data.public.lu/en/datasets/orthophoto-officielle-du-grand-duche-de-luxembourg-edition-2023/"
+    },
+    "license": "CC0-1.0",
+    "requestUrl": "https://wmts1.geoportail.lu/opendata/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=ortho_2023&STYLES=&FORMAT=image%2Fpng&SRS=EPSG%3A3857&BBOX=685018.826,6373018.464,685114.826,6373114.464&WIDTH=624&HEIGHT=624",
+    "projection": "EPSG:3857",
+    "projectedExtent": [
+      685018.826,
+      6373018.464,
+      685114.826,
+      6373114.464
+    ],
+    "size": [
+      624,
+      624
+    ]
+  },
+  "suggestedBoundary": [
+    [
+      6.153970173,
+      49.57552471
+    ],
+    [
+      6.154084881,
+      49.575522918
+    ],
+    [
+      6.154281128,
+      49.575502306
+    ],
+    [
+      6.154318443,
+      49.575480798
+    ],
+    [
+      6.154285274,
+      49.575433301
+    ],
+    [
+      6.154214791,
+      49.575362504
+    ],
+    [
+      6.154133252,
+      49.575294395
+    ],
+    [
+      6.153930094,
+      49.575300668
+    ],
+    [
+      6.153849937,
+      49.575374154
+    ],
+    [
+      6.153855465,
+      49.575425236
+    ],
+    [
+      6.15392042,
+      49.575481694
+    ],
+    [
+      6.153970173,
+      49.57552471
+    ]
+  ]
+}

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="de" data-layout="a">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bagua · Season by Season · Entwurf</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="entwurf.css">
+  <script type="module" src="entwurf.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="project-group">
+      <a class="brand-mark" href="./" aria-label="Entwurfsübersicht" title="Entwurfsübersicht"><i></i><i></i><i></i></a>
+      <button id="project-button" class="project-button" type="button" aria-haspopup="dialog" aria-label="Saisonprojekte · Jardin Bagua">
+        <span><strong>Jardin Bagua</strong><small id="project-year">Saison 2028</small></span><span aria-hidden="true">⌄</span>
+      </button>
+    </div>
+    <nav class="views" aria-label="Gartenansichten">
+      <button type="button" data-view="map" aria-pressed="false">Karte</button>
+      <button type="button" data-view="iso" aria-pressed="true">Beetplan</button>
+    </nav>
+    <div class="top-actions">
+      <span class="quiet-copy preview-label">Layoutvorschau</span>
+      <button class="icon" id="theme" type="button" aria-label="Dunkler Modus" title="Dunkler Modus" aria-pressed="false">◐</button>
+      <button class="icon" id="actions-button" type="button" aria-haspopup="dialog" aria-label="Gartenaktionen" title="Gartenaktionen">⋯</button>
+    </div>
+  </header>
+
+  <main class="workbench" aria-label="Gartenplan">
+    <div class="canvas">
+      <div class="plot-zone" aria-label="Zeichenfläche">
+        <figure class="drawing" id="drawing">
+          <img id="plot" src="../../evidence/visual-design-audit-01/iso/bagua-plot.svg" alt="Isometrische Zeichnung des Jardin Bagua mit sieben Kulturstreifen">
+          <figcaption class="legend"><span><i class="swatch path"></i>Weg</span><span><i class="swatch bed"></i>Beet</span><span><i class="swatch selection"></i>Auswahl</span></figcaption>
+        </figure>
+        <figure class="map-drawing" id="map-drawing" hidden>
+          <img src="../../evidence/segmentation/bagua-ortho-2023.png" alt="Orthofoto des Jardin Bagua in Kirchberg">
+          <figcaption><a href="../../evidence/segmentation/QUELLE.md">Orthofoto © ACT 2023 · CC0</a></figcaption>
+        </figure>
+      </div>
+      <div class="map-tools" aria-label="Kartenwerkzeuge" hidden>
+        <button id="map-button" type="button" aria-haspopup="dialog">Kartenausschnitt · Bagua</button>
+      </div>
+    </div>
+
+    <div class="camera" aria-label="Kamera">
+      <div class="directions" role="group" aria-label="Kompass">
+        <button type="button" data-direction="0" aria-label="Norden" aria-pressed="true" title="Norden">N</button>
+        <button type="button" data-direction="1" aria-label="Osten" aria-pressed="false" title="Osten">O</button>
+        <button type="button" data-direction="2" aria-label="Süden" aria-pressed="false" title="Süden">S</button>
+        <button type="button" data-direction="3" aria-label="Westen" aria-pressed="false" title="Westen">W</button>
+      </div>
+      <div class="moves" role="group" aria-label="Kamerawerkzeuge">
+        <button class="icon" type="button" data-turn="-1" aria-label="Vierteldrehung links" title="Vierteldrehung links">↶</button>
+        <button class="icon" type="button" data-turn="1" aria-label="Vierteldrehung rechts" title="Vierteldrehung rechts">↷</button>
+        <button class="icon" type="button" data-zoom="-1" aria-label="Verkleinern" title="Verkleinern">−</button>
+        <button class="icon" type="button" data-zoom="1" aria-label="Vergrößern" title="Vergrößern">+</button>
+        <button class="icon" type="button" id="pan" aria-label="Verschieben" title="Verschieben" aria-pressed="false">✥</button>
+      </div>
+    </div>
+
+    <div class="detail-toggle">
+      <button type="button" id="detail-button" aria-controls="details" aria-expanded="false">Beetdetails</button>
+    </div>
+
+    <section class="detail" id="details" aria-labelledby="detail-title" hidden>
+      <header class="detail-title">
+        <h1 tabindex="-1" id="detail-title">Beetdetails</h1>
+        <button class="icon" id="close-details" type="button" aria-label="Beetdetails schließen" title="Beetdetails schließen">×</button>
+      </header>
+      <div class="detail-scroll">
+        <div class="detail-section">
+          <p id="history-details" class="read-only" hidden>Rückblick 2027 · Schreibgeschützt</p>
+          <label class="field">Grundfläche
+            <select id="area"><option>Beet · Fläche-10</option><option>Ungeklärt · Fläche-8</option></select>
+          </label>
+        </div>
+        <div class="detail-section" id="split-section">
+          <h2>Aufteilung</h2>
+          <div class="field-pair">
+            <label class="field">Unterteilungen <input id="strips" type="number" min="1" max="100" value="7"></label>
+            <div class="field">Breite <output>2,04 m</output></div>
+          </div>
+          <label class="field" id="angle-field" hidden>Winkel in Grad <input type="number" min="0" max="360" step="0.25" value="0"></label>
+          <div class="button-row">
+            <button type="button" class="secondary" id="angle-toggle" aria-controls="angle-field" aria-expanded="false">Winkel ändern</button>
+          </div>
+        </div>
+        <div class="detail-section" id="strip-section">
+          <h2>Streifen</h2>
+          <label class="field"><span class="sr-only">Streifen</span><select id="strip"></select></label>
+          <dl class="detail-data"><dt>Kultur</dt><dd id="crop">Unbelegt</dd><dt id="result-label">Anbaudaten</dt><dd id="result">Offen</dd></dl>
+          <button type="button" class="primary" id="planting-button" aria-haspopup="dialog">Anbaudaten</button>
+          <button type="button" class="secondary" id="harvest-button" aria-haspopup="dialog" hidden>Erntejournal</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="season" aria-label="Saisonsteuerung">
+      <div class="date-controls">
+        <button class="icon" id="day-back" type="button" aria-label="Voriger Tag" title="Voriger Tag">‹</button>
+        <div class="date-field">
+          <input id="date" type="date" min="2028-05-12" max="2028-05-23" value="2028-05-15" aria-label="Saisondatum">
+          <time id="date-readout" datetime="2028-05-15" aria-hidden="true">15.05.2028</time>
+        </div>
+        <button class="icon" id="day-next" type="button" aria-label="Nächster Tag" title="Nächster Tag">›</button>
+        <button class="icon" id="play" type="button" aria-label="Abspielen" title="Abspielen" aria-pressed="false">▷</button>
+      </div>
+      <div class="season-track">
+        <input id="days" type="range" min="12" max="23" value="15" aria-label="Saisonregler">
+        <span id="moon" class="moon" role="img" aria-label="Mondphase: Abnehmender Mond"><span id="moon-symbol" aria-hidden="true">◕</span><span id="moon-label">Abnehmend</span></span>
+        <select id="plan" aria-label="Planansicht" title="Planansicht">
+          <option value="current">Aktueller Plan</option><option value="history">Rückblick 2027</option>
+        </select>
+      </div>
+      <p id="history-season" class="read-only season-status" role="status" hidden>Rückblick 2027 · Schreibgeschützt</p>
+    </section>
+    <span id="announce" class="sr-only" role="status"></span>
+  </main>
+
+  <dialog id="project-dialog" aria-labelledby="project-title">
+    <form method="dialog">
+      <header class="dialog-title"><h2 id="project-title">Saisonprojekte</h2><button class="icon" aria-label="Saisonprojekte schließen" autofocus>×</button></header>
+      <div class="dialog-content dialog-list">
+        <button type="button" data-year="2028"><strong>Jardin Bagua · 2028</strong><small>Aktueller Plan · sieben Streifen</small></button>
+        <button type="button" data-year="2027"><strong>Jardin Bagua · 2027</strong><small>Rückblick · fünf Streifen · schreibgeschützt</small></button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="actions-dialog" aria-labelledby="actions-title">
+    <form method="dialog">
+      <header class="dialog-title"><h2 id="actions-title">Gartenaktionen</h2><button class="icon" aria-label="Gartenaktionen schließen" autofocus>×</button></header>
+      <div class="dialog-content">
+        <label class="field">Gartenname <input value="Jardin Bagua" maxlength="100" id="garden-name"></label>
+        <div class="button-row"><button type="button" id="save-example" class="primary">Garten speichern</button><a class="secondary" href="./">Garten schließen</a></div>
+        <p class="quiet-copy" id="example-status" role="status">Ansichtsbeispiel · Änderungen gelten nur hier im Fenster.</p>
+        <a href="/">Regulären Planer öffnen</a>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="planting-dialog" aria-labelledby="planting-title">
+    <form method="dialog">
+      <header class="dialog-title"><h2 id="planting-title">Anbaudaten</h2><button class="icon" aria-label="Anbaudaten schließen">×</button></header>
+      <div class="dialog-content">
+        <p class="quiet-copy" id="planting-context"></p>
+        <label class="field">Kultur <select autofocus><option>Unbelegt</option><option>Möhre</option><option>Tomate</option></select></label>
+        <div class="field-pair">
+          <label class="field">Reihenabstand (cm) <input type="number" placeholder="30"></label>
+          <label class="field">Pflanzenabstand (cm) <input type="number" placeholder="2"></label>
+        </div>
+        <div class="button-row"><button class="primary">Übernehmen</button></div>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="harvest-dialog" aria-labelledby="harvest-title">
+    <form method="dialog">
+      <header class="dialog-title"><h2 id="harvest-title">Erntejournal</h2><button class="icon" aria-label="Erntejournal schließen" autofocus>×</button></header>
+      <div class="dialog-content"><p class="read-only">Rückblick 2027 · Schreibgeschützt</p><p>10.05.2027 · Fläche-10 · Streifen 3 · 1,25 kg</p></div>
+    </form>
+  </dialog>
+  <dialog id="map-dialog" aria-labelledby="map-title">
+    <form method="dialog">
+      <header class="dialog-title"><h2 id="map-title">Kartenausschnitt</h2><button class="icon" aria-label="Kartenausschnitt schließen" autofocus>×</button></header>
+      <div class="dialog-content"><p>Jardin Bagua Kirchberg · Orthofoto 2023</p><a href="/">Karteneditor im regulären Planer öffnen</a></div>
+    </form>
+  </dialog>
+</body>
+</html>

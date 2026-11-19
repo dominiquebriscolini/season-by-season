@@ -1,0 +1,16 @@
+# Den aktuellen Gartenplaner ausprobieren
+
+[Leerer Teststand öffnen](http://127.0.0.1:5174/). Neue Testgärten und persönliche Sorten landen im Browserspeicher dieser Adresse. Dein bisheriger Gartenstand liegt unter [Port 5173](http://127.0.0.1:5173/).
+
+## In wenigen Schritten zu einem vollständigen Testgarten
+
+1. **Karte und Wege.** Wähle bei „Kartenausschnitt“ **Jardin Bagua Kirchberg**. Unter **Vorlagen → Sichtbares Bagua-Netz laden** kannst du die vorhandene Beispielgeometrie laden. Für den Zeichenversuch starte mit **Grenze zeichnen**, setze Eckpunkte und schließe mit Enter. Zeichne dann eine **Wegachse** und teste **Letzten Punkt löschen** und **Zeichnung abschließen**. Im Modus **Weggeometrie nachbearbeiten** kannst du Wege auswählen und Breiten verändern oder einen Objektumriss zeichnen. Alternative Kartenquelle ist **Weltkarte** mit Ortssuche, Straßenkarte und Luftbild.
+2. **Fläche und Bestand.** Klicke **Fläche auswählen** und dann eine Grundfläche. Stelle in den **Kartendetails** den Flächentyp auf **Beet** oder **Anbaufläche**. Probiere bei Bedarf einen Baum, einen Schuppen oder ein Gewächshaus. Vergleiche die Nettofläche und schalte die Gewächshaushülle ein und aus.
+3. **Saison und Mond.** Trage einen Gartennamen ein und öffne **Beetplan**. Wähle unten **Hauptjahr einrichten** und speichere für diesen Prüffall **2027**. Stelle **20.05.2027** ein. In Bagua ist an diesem Tag **Vollmond**. Bewege den Regler, spiele einige Tage ab und wechsle kurz zur Karte. Beim Rückweg bleibt das zuletzt eingestellte Datum erhalten.
+4. **Beet, Streifen und Kultur.** Klappe bei Bedarf **Beetdetails** auf. Wähle die klassifizierte Grundfläche, stelle **5** Unterteilungen ein und bestätige **Unterteilung übernehmen**. Wähle einen Streifen, etwa **Streifen 3**, dann **Möhre** oder **Tomate** und **Belegung speichern**. Danach öffnet **Anbaudaten** die Sortenbibliothek, Saat- bzw. Pflanzdaten, Abstände und Mengen. Teste eine geänderte Eingabe und speichere sie. Kompass, Zoom und **Schraffuren/Grün → Luftbild** lassen sich am selben Beet ausprobieren.
+5. **Ernte und Rückblick.** Im **Erntejournal** des belegten Streifens kannst du am 20. Mai eine Ernte erfassen. Öffne **Saisonprojekte → Neues Saisonprojekt**, gib einen neuen Namen ein, wähle **2028** und verknüpfe das Vorjahresprojekt **2027**. **Aufteilung des Vorjahrs kopieren** übernimmt die Aufteilung. Ändere sie im neuen Projekt auf sieben Streifen. Wähle in der Saisonleiste denselben Tag in **2027** oder den Vorjahresplan über **Planansicht**. Dort siehst du die damaligen fünf Streifen, Belegung und Ernte im Schreibschutz. **Aktuelles Projekt** bringt dich zu den sieben Streifen zurück.
+6. **Ausgabe und Wiederöffnung.** Sobald mindestens eine Kultur belegt ist, findest du in den Beetdetails **Anbauplan drucken** und **Excel herunterladen**. In **Gespeicherte Gärten** kannst du einen Stand als JSON-Sicherung herunterladen, wieder öffnen oder eine Sicherung als eigenes Projekt importieren.
+
+## „Krautgaart“ auf Port 5173
+
+Im bisherigen Browserstand **Krautgaart → Beetplan → Hauptjahr einrichten** wählen. Das gewünschte tatsächliche Hauptjahr erst dann speichern, wenn du Saisonregler, Mondphase und Erntejournal diesem Gartenjahr zuordnen möchtest. Für den Rückblick braucht es zusätzlich ein ausdrücklich verknüpftes Vorjahresprojekt.

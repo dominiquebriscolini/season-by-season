@@ -1,0 +1,23 @@
+node_modules/
+dist/
+.playwright-cli/
+.archify/
+.env
+.env.*
+*.log
+/experiments/way-guided/*.png
+
+# Local review evidence stays out of Git. The planner imports these public source fixtures.
+/evidence/*
+!/evidence/transfer/
+/evidence/transfer/*
+!/evidence/transfer/fixture.json
+!/evidence/transfer/hesperange-ortho-2023.png
+!/evidence/transfer/hesperange-prompts.json
+!/evidence/transfer/QUELLE.md
+!/evidence/segmentation/
+/evidence/segmentation/*
+!/evidence/segmentation/fixture.json
+!/evidence/segmentation/bagua-ortho-2023.png
+!/evidence/segmentation/rgb-input.json
+!/evidence/segmentation/QUELLE.md

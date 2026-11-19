@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weggestützte Gartenanalyse · Season by Season</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./experiment.css">
+<header>
+  <div><p>Season by Season</p><h1>Weggestützte Gartenanalyse</h1></div>
+  <nav aria-label="Testgarten und Vorlagen">
+    <label>Testgarten <select id="garden"></select></label>
+    <details class="examples"><summary>Vorlagen</summary>
+      <div>
+        <button id="sample">Frühere Achsen laden</button>
+        <button id="network" hidden>Sichtbares Bagua-Netz laden</button>
+        <button id="clear">Neu beginnen</button>
+      </div>
+    </details>
+  </nav>
+</header>
+<main>
+  <section class="workspace" aria-label="Gartenkarte">
+    <div class="toolbar" role="group" aria-label="Kartenwerkzeuge">
+      <div id="draw-tools" class="tools">
+        <button data-mode="boundary">Grenze zeichnen</button>
+        <button data-mode="axis">Wegachse zeichnen</button>
+      </div>
+      <div id="edit-tools" class="tools" hidden>
+        <button data-mode="select">Weg auswählen</button>
+        <button data-mode="move">Punkt versetzen</button>
+        <button data-mode="insert">Punkt einsetzen</button>
+        <button data-mode="delete">Punkt entfernen</button>
+        <button data-mode="outline">Objektumriss zeichnen</button>
+      </div>
+      <button data-mode="inventory">Fläche auswählen</button>
+      <div id="draft-tools" class="tools" hidden>
+        <button id="undo">Letzten Punkt löschen</button>
+        <button id="finish">Zeichnung abschließen</button>
+      </div>
+    </div>
+    <div class="map-frame">
+      <svg id="map" viewBox="0 0 624 624" tabindex="0" aria-label="Luftbild mit Grundstück, Wegachsen und Flächen">
+        <image width="624" height="624"></image><g id="overlays"></g>
+      </svg>
+      <div class="navigation" role="group" aria-label="Kartennavigation">
+        <button id="zoom-in" aria-label="Vergrößern" title="Vergrößern">+</button>
+        <button id="zoom-out" aria-label="Verkleinern" title="Verkleinern">−</button>
+        <button id="pan" aria-pressed="false" title="Karte verschieben">Verschieben</button>
+        <button id="fit">Grundstück einpassen</button>
+      </div>
+      <a class="attribution" href="https://data.public.lu/en/datasets/orthophoto-officielle-du-grand-duche-de-luxembourg-edition-2023/">Orthofoto 2023 · ACT Luxembourg · CC0</a>
+    </div>
+    <p id="status" role="status"></p>
+  </section>
+  <aside aria-label="Werkzeuge und Einstellungen">
+    <div class="steps" role="group" aria-label="Bearbeitungsphase">
+      <button data-phase="draw" aria-pressed="true">Wegenetz zeichnen</button>
+      <button data-phase="edit" aria-pressed="false">Weggeometrie nachbearbeiten</button>
+    </div>
+    <section class="panel">
+      <h2>Wegbreite</h2>
+      <label class="width-field">Standardbreite (cm) <input id="standard" type="number" value="80" min="1" max="1000" step="0.1" required></label>
+      <p id="phase-help">Die Standardbreite gilt für alle Wege.</p>
+      <small>Hellblau gestrichelt sind virtuelle Trennlinien. Sie teilen Grundflächen und erzeugen keine Wegfläche. Zum Korrigieren den gezeichneten Weg auswählen.</small>
+      <p id="extension-warning" aria-live="polite" hidden>Mindestens ein offenes Ende braucht eine korrigierte Verlängerungsrichtung.</p>
+      <p id="empty-path-warning" aria-live="polite" hidden>Mindestens eine Achse erzeugt keine Wegfläche innerhalb der Grundstücksgrenze.</p>
+      <div id="paths" hidden></div>
+    </section>
+    <details id="land" class="panel">
+      <summary>Flächen und Bestand</summary>
+      <button id="analyse">Flächen ableiten</button>
+      <p id="stats"></p>
+      <p id="net-ways"></p>
+      <div id="shells" class="tools"></div>
+      <p id="inventory-help">Eine Fläche auf der Karte auswählen.</p>
+      <div id="regions"></div>
+      <div id="retired"></div>
+    </details>
+    <button id="download">Versuchsdaten speichern</button>
+  </aside>
+</main>
+<script type="module" src="./ui.js"></script>
+</html>

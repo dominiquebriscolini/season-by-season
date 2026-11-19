@@ -1,0 +1,85 @@
+.garden-map {
+  position: relative;
+  min-width: 0;
+  min-height: 340px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #dce7da;
+  color: #263c32;
+}
+
+.garden-map:focus-visible {
+  outline: 3px solid #a1c5a4;
+  outline-offset: 2px;
+}
+
+.garden-map--drawing .ol-viewport {
+  cursor: crosshair;
+}
+
+.garden-map .ol-control {
+  padding: 3px;
+  background: #faf9f3;
+  border: 1px solid #d6dcd1;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #18331f20;
+}
+
+.garden-map .ol-zoom {
+  top: 12px;
+  left: 12px;
+}
+
+.garden-map .ol-zoom button {
+  width: 33px;
+  height: 33px;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 5px;
+  font-size: 22px;
+  color: #263c32;
+}
+
+.garden-map .ol-zoom button:hover,
+.garden-map .ol-zoom button:focus-visible {
+  background: #e9eee4;
+}
+
+.garden-map .ol-attribution,
+.garden-map__image-credit {
+  box-sizing: border-box;
+  bottom: 8px;
+  padding: 3px 7px;
+  border: 0;
+  border-radius: 4px;
+  background: #faf9f3ed;
+  box-shadow: none;
+  color: #263c32;
+  font: 11px/1.4 system-ui, sans-serif;
+}
+
+.garden-map .ol-attribution {
+  right: 8px;
+  max-width: calc(100% - 16px);
+}
+
+.garden-map__image-credit {
+  position: absolute;
+  z-index: 1;
+  left: 8px;
+  pointer-events: auto;
+}
+
+.garden-map .ol-attribution a,
+.garden-map__image-credit a {
+  color: #263c32;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .garden-map__image-credit {
+    bottom: 32px;
+  }
+}

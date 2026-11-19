@@ -1,0 +1,178 @@
+#app:is([data-layout="iso"], [data-layout="map"]) {
+  --iso-surface: #f9faf5;
+  --iso-desk: #eeefe7;
+  --iso-ink: #202c24;
+  --iso-muted: #4a5c50;
+  --iso-line: #d6dcd2;
+  --iso-field-line: #818f83;
+  --iso-active: #dce7d9;
+  --iso-accent: #24563e;
+  --iso-focus: #216147;
+  --iso-warning: #77541b;
+  --iso-hit: 34px;
+  --iso-camera-width: 56px;
+  --iso-dock-width: 312px;
+  --line: var(--iso-line);
+  --paper: var(--iso-surface);
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100vh;
+  height: 100dvh;
+  min-height: 460px;
+  color-scheme: light;
+  background: var(--iso-desk);
+  color: var(--iso-ink);
+  font: .8667rem/1.2rem 'Segoe UI', system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+#app[data-theme="dark"]:is([data-layout="iso"], [data-layout="map"]) {
+  --iso-surface: #222f28;
+  --iso-desk: #18221d;
+  --iso-ink: #e6eee7;
+  --iso-muted: #adbbb0;
+  --iso-line: #40544a;
+  --iso-field-line: #88a091;
+  --iso-active: #314f3e;
+  --iso-accent: #a9d7b5;
+  --iso-focus: #b9e8c3;
+  --iso-warning: #eed19a;
+  color-scheme: dark;
+}
+
+#app:is([data-layout="iso"], [data-layout="map"]) > header { display: none }
+
+#app:is([data-layout="iso"], [data-layout="map"]) :is(button, input:not([type=range], [type=checkbox], [type=radio]), select) {
+  min-block-size: var(--iso-hit);
+  max-inline-size: 100%;
+  border-color: var(--iso-field-line);
+  background: var(--iso-surface);
+}
+
+#app:is([data-layout="iso"], [data-layout="map"]) button { min-inline-size: var(--iso-hit); padding: 4px 8px; }
+#app:is([data-layout="iso"], [data-layout="map"]) button:hover { background: var(--iso-active); }
+#app:is([data-layout="iso"], [data-layout="map"]) button[aria-pressed="true"] {
+  border-color: var(--iso-accent);
+  background: var(--iso-active);
+  color: var(--iso-accent);
+  font-weight: 650;
+}
+#app:is([data-layout="iso"], [data-layout="map"]) :focus-visible:not(.garden-iso *) { outline: 2px solid var(--iso-focus); outline-offset: 2px; }
+
+#app:is([data-layout="iso"], [data-layout="map"]) #integrated-navigation {
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: auto minmax(104px, 180px) minmax(0, 1fr) auto auto minmax(0, 1fr) auto auto auto auto;
+  align-items: center;
+  gap: 4px;
+  min-block-size: 52px;
+  padding: 4px 16px;
+  background: var(--iso-surface);
+}
+
+#app:is([data-layout="iso"], [data-layout="map"]) #iso-project-menu { grid-area: 1 / 1; min-width: 0; }
+#app:is([data-layout="iso"], [data-layout="map"]) #iso-project-menu button { font-weight: 650; white-space: nowrap; }
+#app:is([data-layout="iso"], [data-layout="map"]) .iso-project-name { grid-area: 1 / 2; min-width: 0; }
+#app:is([data-layout="iso"], [data-layout="map"]) .iso-project-name input { width: 100%; min-width: 0; font-weight: 650; }
+#app:is([data-layout="iso"], [data-layout="map"]) #map-tab { grid-area: 1 / 4; }
+#app:is([data-layout="iso"], [data-layout="map"]) #iso-tab { grid-area: 1 / 5; }
+#app:is([data-layout="iso"], [data-layout="map"]) #garden-actions { grid-area: 1 / 7; }
+#app:is([data-layout="iso"], [data-layout="map"]) #save-project { grid-area: 1 / 8; }
+#app:is([data-layout="iso"], [data-layout="map"]) #close-project { grid-area: 1 / 9; }
+#app:is([data-layout="iso"], [data-layout="map"]) #workbench-theme { grid-area: 1 / 10; }
+#app:is([data-layout="iso"], [data-layout="map"]) .iso-nav-icon { display: none; }
+
+#garden-actions, #plan-export-actions:not([hidden]) { display: flex; align-items: center; gap: 4px; }
+#garden-actions button { white-space: nowrap; }
+
+#app[data-layout="iso"] #integrated-navigation {
+  grid-template-columns: auto auto minmax(104px, 180px) minmax(0, 1fr) auto auto minmax(0, 1fr) auto auto;
+}
+#app[data-layout="iso"] #garden-actions { grid-area: 1 / 1; }
+#app[data-layout="iso"] #iso-project-menu { grid-area: 1 / 2; }
+#app[data-layout="iso"] .iso-project-name { grid-area: 1 / 3; }
+#app[data-layout="iso"] #map-tab { grid-area: 1 / 5; }
+#app[data-layout="iso"] #iso-tab { grid-area: 1 / 6; }
+
+@media (max-width: 1150px) {
+  #app[data-layout="iso"] #plan-export-actions .iso-nav-icon { display: inline; font-size: 1.18rem; }
+  #app[data-layout="iso"] #plan-export-actions .iso-nav-caption { display: none; }
+}
+
+.workbench-theme-dialog {
+  width: min(350px, calc(100% - 24px));
+  background: var(--iso-surface);
+  color: var(--iso-ink);
+  border: 1px solid var(--iso-line);
+  border-radius: 10px;
+  padding: 12px;
+}
+.workbench-theme-dialog::backdrop { background: #17261d75; }
+.workbench-theme-choices { display: grid; gap: 4px; }
+.workbench-theme-choices label { display: flex; align-items: center; gap: 8px; min-height: var(--iso-hit); }
+.workbench-theme-choices input { accent-color: var(--iso-accent); }
+
+#app:is([data-layout="iso"], [data-layout="map"]) .iso-project-name > span,
+#app:is([data-layout="iso"], [data-layout="map"]) .season-calendar label > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+#app:is([data-layout="iso"], [data-layout="map"]) #project-notices {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  align-content: start;
+  max-inline-size: 1050px;
+  height: 26px;
+  margin: auto;
+  padding: 3px 12px;
+  overflow: auto;
+  color: var(--iso-muted);
+  font-size: .8rem;
+  line-height: 16px;
+  overflow-wrap: anywhere;
+}
+
+#app:is([data-layout="iso"], [data-layout="map"]) #project-notices > span { min-width: 0; font-size: inherit; }
+#app:is([data-layout="iso"], [data-layout="map"]) #project-status { flex: 0 1 auto; }
+#app:is([data-layout="iso"], [data-layout="map"]) #save-state:not(:empty) { padding: 0 5px; color: var(--iso-accent); background: var(--iso-active); }
+#app:is([data-layout="iso"], [data-layout="map"]) #save-state.is-dirty { color: var(--iso-warning); }
+
+@media (max-width: 900px), (pointer: coarse) {
+  #app:is([data-layout="iso"], [data-layout="map"]) { --iso-hit: 44px; }
+}
+
+@media (max-width: 900px) {
+  #app:is([data-layout="iso"], [data-layout="map"]) #integrated-navigation {
+    grid-template-columns: minmax(0, 1fr) repeat(8, 20px);
+    min-block-size: 92px;
+    padding: 0 8px 1px;
+    gap: 2px 4px;
+  }
+
+  #app:is([data-layout="iso"], [data-layout="map"]) #iso-project-menu { grid-area: 1 / 1; }
+  #app:is([data-layout="iso"], [data-layout="map"]) .iso-project-name { grid-area: 2 / 1; }
+  #app:is([data-layout="iso"], [data-layout="map"]) #map-tab { grid-area: 2 / 2 / 3 / 5; }
+  #app:is([data-layout="iso"], [data-layout="map"]) #iso-tab { grid-area: 2 / 5 / 3 / 10; }
+  #app:is([data-layout="iso"], [data-layout="map"]) #garden-actions { grid-area: 1 / 2 / 2 / 4; }
+  #app:is([data-layout="iso"], [data-layout="map"]) #save-project { grid-area: 1 / 4 / 2 / 6; }
+  #app:is([data-layout="iso"], [data-layout="map"]) #close-project { grid-area: 1 / 6 / 2 / 8; }
+  #app:is([data-layout="iso"], [data-layout="map"]) #workbench-theme { grid-area: 1 / 8 / 2 / 10; }
+  #app:is([data-layout="iso"], [data-layout="map"]) .iso-nav-icon { display: inline; font-size: 1.18rem; }
+  #app:is([data-layout="iso"], [data-layout="map"]) .iso-nav-caption { display: none; }
+
+  #app[data-layout="iso"] #integrated-navigation { grid-template-columns: auto minmax(0, 1fr) auto auto; }
+  #app[data-layout="iso"] #garden-actions { grid-area: 1 / 1 / 2 / 3; }
+  #app[data-layout="iso"] #iso-project-menu { grid-area: 2 / 1; }
+  #app[data-layout="iso"] .iso-project-name { grid-area: 2 / 2; }
+  #app[data-layout="iso"] #map-tab { grid-area: 2 / 3; }
+  #app[data-layout="iso"] #iso-tab { grid-area: 2 / 4; }
+  #app[data-layout="iso"] #save-project { grid-area: 1 / 3; justify-self: end; }
+  #app[data-layout="iso"] #close-project { grid-area: 1 / 4; justify-self: end; }
+}

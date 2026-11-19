@@ -1,0 +1,146 @@
+{
+  "method": "rgb",
+  "objects": [
+    {
+      "kind": "pair",
+      "points": [
+        [
+          451,
+          200
+        ],
+        [
+          488,
+          234
+        ],
+        [
+          534,
+          224
+        ],
+        [
+          545,
+          314
+        ]
+      ],
+      "halfWidth": 14
+    },
+    {
+      "kind": "pair",
+      "points": [
+        [
+          398,
+          247
+        ],
+        [
+          424,
+          299
+        ],
+        [
+          394,
+          243
+        ],
+        [
+          394,
+          298
+        ]
+      ],
+      "halfWidth": 6
+    }
+  ],
+  "events": [
+    {
+      "action": "select",
+      "ms": 0,
+      "kind": "pair"
+    },
+    {
+      "action": "point",
+      "ms": 3,
+      "point": [
+        451,
+        200
+      ]
+    },
+    {
+      "action": "point",
+      "ms": 5,
+      "point": [
+        488,
+        234
+      ]
+    },
+    {
+      "action": "point",
+      "ms": 6,
+      "point": [
+        534,
+        224
+      ]
+    },
+    {
+      "action": "point",
+      "ms": 15,
+      "point": [
+        545,
+        314
+      ]
+    },
+    {
+      "action": "width",
+      "ms": 134,
+      "value": 14
+    },
+    {
+      "action": "finish",
+      "ms": 135,
+      "via": "button"
+    },
+    {
+      "action": "select",
+      "ms": 166,
+      "kind": "pair"
+    },
+    {
+      "action": "point",
+      "ms": 169,
+      "point": [
+        398,
+        247
+      ]
+    },
+    {
+      "action": "point",
+      "ms": 170,
+      "point": [
+        424,
+        299
+      ]
+    },
+    {
+      "action": "point",
+      "ms": 172,
+      "point": [
+        394,
+        243
+      ]
+    },
+    {
+      "action": "point",
+      "ms": 173,
+      "point": [
+        394,
+        298
+      ]
+    },
+    {
+      "action": "width",
+      "ms": 224,
+      "value": 6
+    },
+    {
+      "action": "finish",
+      "ms": 226,
+      "via": "button"
+    }
+  ],
+  "elapsedMs": 226
+}
