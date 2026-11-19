@@ -2,7 +2,7 @@ import 'ol/ol.css'
 import OlMap from 'ol/Map.js'
 import View from 'ol/View.js'
 import {defaults as controls} from 'ol/control/defaults.js'
-import {getIntersection, intersects} from 'ol/extent.js'
+import {getCenter, getIntersection, getWidth, intersects} from 'ol/extent.js'
 import {defaults as interactions} from 'ol/interaction/defaults.js'
 import TileLayer from 'ol/layer/Tile.js'
 import {fromLonLat} from 'ol/proj.js'
@@ -11,7 +11,7 @@ import OSM from 'ol/source/OSM.js'
 import XYZ from 'ol/source/XYZ.js'
 import {luxembourgAerial} from './luxembourg-aerial.js'
 import {createWorldBasemapControl, worldBasemaps} from './world-basemaps.js'
-import {worldSection} from './world-geography.js'
+import {validWorldGeoreference, worldSection} from './world-geography.js'
 import './world-map-picker.css'
 
 const searchEndpoint = 'https://photon.komoot.io/api/'
@@ -59,7 +59,7 @@ async function searchPlaces(query, signal) {
   return results
 }
 
-export function mountWorldMapPicker(button, {onUse}) {
+export function mountWorldMapPicker(button, {getInitialSection, onUse}) {
   const dialog = element('dialog')
   dialog.className = 'world-map-picker'
   dialog.setAttribute('aria-label', 'Weltkarte')
@@ -191,6 +191,7 @@ export function mountWorldMapPicker(button, {onUse}) {
   let using = false
   let pickedName = ''
   let georeference = null
+  let initializedSection = false
 
   function updateSelection() {
     const size = map.getSize()
@@ -223,6 +224,17 @@ export function mountWorldMapPicker(button, {onUse}) {
     dialog.showModal()
     map.setTarget(target)
     map.updateSize()
+    const initial = initializedSection ? null : getInitialSection?.()
+    const size = map.getSize()
+    const side = size ? Math.min(...size, 624) : 0
+    if (initial && side > 0 && validWorldGeoreference(initial.georeference)) {
+      const {projectedExtent} = initial.georeference
+      view.setCenter(getCenter(projectedExtent))
+      view.setResolution(getWidth(projectedExtent) / side)
+      input.value = pickedName = initial.name
+      results.replaceChildren()
+      initializedSection = true
+    }
     updateSelection()
   }
   button.addEventListener('click', open)

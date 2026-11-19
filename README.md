@@ -1,10 +1,10 @@
 # Season by Season
 
-Browserbasierter Gartenplaner mit Karteneditor, isometrischem Beetplan, Saisonregler und Anbauausgabe. [Krautgaart ausprobieren](https://dominiquebriscolini.github.io/season-by-season/?beispiel=krautgaart)
+Browserbasierter Gartenplaner mit Karteneditor, isometrischem Beetplan, Saisonregler und Anbauausgabe. [Garden_Example ausprobieren](https://dominiquebriscolini.github.io/season-by-season/)
 
-## Vorschau 0.1.0
+## Vorschau 0.1.1
 
-„Krautgaart“ ist ein schematischer Beispielgarten mit fiktiven Koordinaten und Beispielbelegungen. Der Link öffnet den Beetplan direkt. Änderungen werden im eigenen Browser gespeichert. Eine JSON-Sicherung kann über „Gespeicherte Gärten“ heruntergeladen oder geöffnet werden.
+„Garden_Example“ öffnet auf dem amtlichen Luftbild des Jardin Bagua in Kirchberg. Unter „Beetplan“ zeigen zwei unterteilte Beete und ein durchgehend bepflanztes Beet sechs Beispielkulturen. Änderungen werden im eigenen Browser gespeichert. Eine JSON-Sicherung kann über „Gespeicherte Gärten“ heruntergeladen oder geöffnet werden.
 
 - In der Karte lassen sich Grundstück, Wege, Flächentypen und Bestand erfassen.
 - Im Beetplan lassen sich Beete teilen, Kulturen und Anbauwerte zuweisen und Saisondaten betrachten.
@@ -19,7 +19,7 @@ npm ci
 npm run dev
 ```
 
-Der Entwicklungsserver startet unter `http://127.0.0.1:5173/`. Für das Beispiel `?beispiel=krautgaart` anfügen. `npm run build` erstellt die statische Ausgabe in `dist/`. GitHub Actions verwendet beim Build den Unterpfad der Pages-Site.
+Der Entwicklungsserver startet unter `http://127.0.0.1:5173/`. Für das Beispiel `?beispiel=garden-example` anfügen. `npm run build` erstellt die statische Ausgabe in `dist/`. GitHub Actions aktiviert `--mode public-preview` und verwendet den Unterpfad der Pages-Site.
 
 ## Quellen und Prüfung
 

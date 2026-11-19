@@ -1,5 +1,17 @@
 # Season by Season · Entwicklungsplan
 
+## Öffentliche Vorschau 0.1.1 · Garden_Example
+
+**Nutzerziel und sichtbarer Nachweis.** Das bisherige öffentliche Krautgaart-Beispiel wird durch „Garden_Example“ ersetzt. Die öffentliche Startseite zeigt beim Öffnen eine Karte am realen Gartenstandort. Mehrere benannte Beete und Streifen mit verschiedenen Beispielkulturen erklären den Beetplan. Der private Krautgaart-Stand dient weiterhin nur der lokalen Regression. [Visuelle Spezifikation](specs/garden-example/README.md)
+
+**Standort und Daten.** Jardin Bagua Kirchberg in Luxemburg ist als Gemeinschaftsgarten in der CELL-Studie mit Koordinaten belegt. Der vorhandene Luftbildausschnitt von ACT 2023 ist CC0. Die vorhandene Modellvorlage liefert Wege und Basisgeometrie. Belegungen und Planung werden als Beispiel gekennzeichnet. [Standortnachweis](https://eisegaart.cell.lu/wp-content/uploads/sites/16/2023/12/TEST-Rapport-Final-JOS.pdf#page=8) · [Orthofotoquelle](https://data.public.lu/en/datasets/orthophoto-officielle-du-grand-duche-de-luxembourg-edition-2023/) · [Vorlage](evidence/segmentation/QUELLE.md)
+
+**Umsetzung.** Die Pages-Startseite öffnet standardmäßig die Karte. Die Weltkarte startet beim ersten Öffnen aus dem Beispiel am vorhandenen Ausschnitt. Der Beetplan beginnt am 15. Juni 2026. Das Frühlingsbeet zeigt Kopfsalat und Radieschen, das Sommerbeet Möhre, Bohne und Zucchini, das durchgehende Tomatenbeet eine Tomatenkultur. Der alte Beispiellink öffnet „Garden_Example“. Die Bibliothek blendet unveränderte automatische Kopien der alten Demo aus. Bearbeitete Stände und Sicherungen bleiben lesbar. [Beispieldaten](src/garden-example-project.js) · [Start und Projektbibliothek](src/integrated-planner.js)
+
+**Prüfung.** Die unabhängige Spezifikationsprüfung gab Fassung 1.0 frei. Anbau- und Streifenmodell, Pages-Build sowie der sichtbare lokale Einstieg mit Bagua-Luftbild, vorausgewählter Weltkarte und Beetplan wurden geprüft. Die unabhängige Produktabnahme bestätigt den Nutzerweg auf 1440 und 390 CSS-Pixeln, sechs Belegungen in Druck und Excel und den Umstieg aus einem echten Altversionsstand. Die unabhängige technische Abnahme bestätigte das amtliche Luftbild, Geometrie, IDs und Browserpersistenz. Der private Krautgaart-Entwurf wurde getrennt geprüft. [Spezifikationsreview](specs/garden-example/SPEZIFIKATIONSREVIEW.md) · [Produktabnahme](specs/garden-example/PRODUKTABNAHME.md) · [Technische Abnahme](specs/garden-example/TECHNISCHE-ABNAHME.md) · [Lokale Vorschau](http://127.0.0.1:5176/season-by-season/)
+
+**Veröffentlichung.** Version 0.1.1 wird als GitHub-Pages-Vorschau ausgeliefert. Der Freigabestand und die Prüfung der anonymen Startseite werden im GitHub-Release dokumentiert. [Startseite](https://dominiquebriscolini.github.io/season-by-season/) · [Versionshinweise](https://github.com/dominiquebriscolini/season-by-season/releases/tag/v0.1.1)
+
 ## Öffentliche Vorschau 0.1.0 auf GitHub
 
 **Nutzerziel und sichtbarer Nachweis.** Den aktuellen Stand prüfen, committen und in `dominiquebriscolini/season-by-season` öffentlich bereitstellen. Der direkte GitHub-Pages-Link öffnet in einem frischen Browser ein sichtbares und bearbeitbares „Krautgaart“-Beispiel. [Visuelle Spezifikation](specs/oeffentliche-vorschau/README.md)
