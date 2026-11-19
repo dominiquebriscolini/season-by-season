@@ -35,6 +35,10 @@
 
 #map-source-bar > label { min-inline-size: 0; }
 #map-source-bar #garden { inline-size: 224px; min-inline-size: 0; text-overflow: ellipsis; }
+#example-map-status {
+  color: var(--iso-muted);
+  font-size: .8rem;
+}
 #map-source-bar .world-basemap-control { min-inline-size: 0; }
 #map-source-bar .examples summary {
   min-height: var(--iso-hit);
@@ -255,6 +259,7 @@
     white-space: nowrap;
   }
   #map-source-bar #garden { inline-size: 100%; }
+  #example-map-status { grid-column: 1 / -1; }
   #map-source-bar .world-basemap-control { grid-column: 1 / -1; }
 
   #map-page .navigation {

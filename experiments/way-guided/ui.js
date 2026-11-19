@@ -5,7 +5,6 @@ import {containsPoint, inspectRegion, isBuilding, isShell, netInventory, vegetat
 import {renderWorldTiles, worldImage} from '../../src/world-geography.js'
 import {createWorldBasemapControl, worldBasemaps} from '../../src/world-basemaps.js'
 import {luxembourgAerial} from '../../src/luxembourg-aerial.js'
-import {isKrautgaartPreview, krautgaartKey} from '../../src/krautgaart-fixture.js'
 
 const get = id => document.getElementById(id)
 const garden = get('garden')
@@ -777,7 +776,7 @@ async function load(snapshot) {
   const usingWorldMap = activeGarden === 'world'
   const metadata = mapImage()
   const schematic = Boolean(metadata.schematic)
-  get('sample').hidden = usingWorldMap
+  get('sample').hidden = usingWorldMap || schematic
   get('network').hidden = garden.value !== 'bagua'
   image = null
   worldTiles?.remove()
@@ -827,11 +826,9 @@ async function load(snapshot) {
   }
 }
 
-const schematicPreview = integrated && isKrautgaartPreview(location.search)
 for (const [key, {fixture}] of Object.entries(gardens)) {
-  if (!fixture.image.schematic || schematicPreview) garden.add(new Option(fixture.name, key))
+  if (!fixture.image.schematic) garden.add(new Option(fixture.name, key))
 }
-if (schematicPreview) garden.value = krautgaartKey
 garden.onchange = () => {
   if (integrated ? !beforeReset() : (boundary.length || axes.length || draft.length) &&
       !window.confirm('Beim Wechsel des Testgartens wird der aktuelle Entwurf verworfen. Testgarten wechseln?')) {

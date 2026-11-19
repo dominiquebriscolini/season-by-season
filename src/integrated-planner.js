@@ -12,7 +12,8 @@ import {mountWorkbenchTheme} from './workbench-theme.js'
 import {createIsoCamera} from './iso-camera.js'
 import {readIsoDraft, savedFieldGeometry, writeIsoDraft} from './iso-session-draft.js'
 import {mountSeasonToolbar} from './season-toolbar.js'
-import {isKrautgaartPreview, krautgaartKey} from './krautgaart-fixture.js'
+import {gardenExampleDate, gardenExampleId, gardenExampleLocation, createGardenExampleProject} from './garden-example-project.js'
+import {krautgaartDemoId, krautgaartKey} from './krautgaart-fixture.js'
 import {assignSeasonYear, createSeasonProject, importProject, listProjects, readLegacyBackup, readProject,
   readProjectBackup, restoreProject, saveProject} from './integrated-storage.js'
 
@@ -33,6 +34,11 @@ worldMapButton.type = 'button'
 worldMapButton.textContent = 'Weltkarte'
 worldMapButton.setAttribute('aria-haspopup', 'dialog')
 mapSources.prepend(worldMapButton)
+const exampleMapStatus = document.createElement('span')
+exampleMapStatus.id = 'example-map-status'
+exampleMapStatus.textContent = 'Beispielplanung · Pflanzungen im Beetplan'
+exampleMapStatus.hidden = true
+mapSources.append(exampleMapStatus)
 header.insertAdjacentHTML('afterend', `
   <nav id="integrated-navigation" aria-label="Garten und Ansichten">
     <div id="garden-actions">
@@ -50,7 +56,7 @@ header.insertAdjacentHTML('afterend', `
     <button id="close-project" aria-label="Garten schließen" title="Garten schließen"><span class="iso-nav-icon" aria-hidden="true">×</span><span class="iso-nav-caption">Garten schließen</span></button>
     <button id="workbench-theme" type="button" aria-label="Farbschema" aria-haspopup="dialog" title="Farbschema"><span class="iso-nav-icon" aria-hidden="true">◐</span><span class="iso-nav-caption">Farbschema</span></button>
     <div id="project-notices">
-      <span id="example-project-status" hidden>Schematisches Beispiel</span>
+      <span id="example-project-status" hidden></span>
       <span id="save-state" role="status"></span>
       <span id="project-status" role="status"></span>
       <span id="draft-storage-status" role="status"></span>
@@ -169,7 +175,12 @@ function setPage(next) {
   get('workbench-theme').hidden = page !== 'map' || showLegacy
   const notices = showLegacy ? 'integrated-navigation' : `${page}-notices`
   get(notices).append(get('project-notices'))
-  get('example-project-status').hidden = showLegacy || saved?.snapshot.garden !== krautgaartKey
+  const example = saved?.id === gardenExampleId
+  exampleMapStatus.hidden = !example || page !== 'map'
+  const exampleStatus = get('example-project-status')
+  const oldExample = saved?.snapshot.garden === krautgaartKey
+  exampleStatus.hidden = showLegacy || !(oldExample || (example && page === 'iso'))
+  exampleStatus.textContent = oldExample ? 'Früheres schematisches Beispiel' : 'Beispielbepflanzung'
   if (page !== 'iso') seasonToolbar?.stop()
   get('map-page').hidden = page !== 'map'
   get('iso-page').hidden = page !== 'iso'
@@ -247,6 +258,9 @@ async function loadWorldMapPicker() {
   try {
     const {mountWorldMapPicker} = await import('./world-map-picker.js')
     const open = mountWorldMapPicker(worldMapButton, {
+      getInitialSection: () => saved?.id === gardenExampleId
+        ? {name: gardenExampleLocation, georeference: saved.snapshot.georeference}
+        : null,
       async onUse({georeference, name, basemap}) {
         if (!canLeave()) return false
         working = true
@@ -306,7 +320,8 @@ async function persist(nextPlanning, view, explicit = false) {
 }
 
 function showIso() {
-  const viewState = seasonToolbar?.getView()
+  const viewState = seasonToolbar?.getView() ??
+    (saved?.id === gardenExampleId ? {date: gardenExampleDate} : undefined)
   clearSeasonView()
   const state = readIsoState()
   readIsoState.dispose?.()
@@ -520,6 +535,8 @@ async function library() {
   const projects = await listProjects()
   list.replaceChildren()
   for (const project of projects) {
+    if (project.id === krautgaartDemoId && project.name === 'Krautgaart' &&
+        project.snapshot.garden === krautgaartKey && project.revision === 1) continue
     const row = document.createElement('div')
     row.className = 'project-row'
     row.append(
@@ -596,14 +613,13 @@ get('import-project').onchange = event => {
   })
 }
 
-async function openKrautgaartExample() {
-  const {createKrautgaartProject, krautgaartDemoId} = await import('./krautgaart-project.js')
-  let record = await readProject(krautgaartDemoId)
+async function openGardenExample() {
+  let record = await readProject(gardenExampleId)
   if (!record) {
     try {
-      record = await saveProject(createKrautgaartProject(), null)
+      record = await saveProject(createGardenExampleProject(), null)
     } catch (error) {
-      record = await readProject(krautgaartDemoId)
+      record = await readProject(gardenExampleId)
       if (!record) throw error
     }
   }
@@ -611,23 +627,25 @@ async function openKrautgaartExample() {
 }
 
 await run(async () => {
-  const preview = isKrautgaartPreview(location.search)
+  const example = new URLSearchParams(location.search).get('beispiel')
+  const preview = example === 'garden-example' || example === krautgaartKey ||
+    (example === null && import.meta.env.MODE === 'public-preview')
   let checkpoint
   try {
     checkpoint = readIsoDraft()
   } catch {
     get('draft-storage-status').textContent = 'Der Tab-Speicher für ISO-Entwürfe ist nicht verfügbar.'
-    if (preview) await openKrautgaartExample()
+    if (preview) await openGardenExample()
     return
   }
   if (!checkpoint) {
-    if (preview) await openKrautgaartExample()
+    if (preview) await openGardenExample()
     return
   }
   const record = await readProject(checkpoint.projectId)
   if (!record) {
     checkpointIsoDraft(null)
-    if (preview) await openKrautgaartExample()
+    if (preview) await openGardenExample()
     else say('Der Garten zum ISO-Entwurf ist nicht mehr verfügbar.')
     return
   }
